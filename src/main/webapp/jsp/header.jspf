@@ -1,0 +1,16 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div id="header" style="background-color: lightgray; color: white; padding: 1ex; text-align: right;">
+  <span id="shoppingCartItemsCount"><a href="/shoppingCart">${shoppingCartItemsCount} in your cart</a></span>
+  &nbsp;&nbsp;&nbsp;
+    <span id="userGreeting">
+    <c:choose>
+      <c:when test="${isLoggedIn}">
+        Hello ${userName}!
+      </c:when>
+      <c:otherwise>
+        <a href="#">Please sign in</a>
+      </c:otherwise>
+    </c:choose>
+    </span>
+</div>
