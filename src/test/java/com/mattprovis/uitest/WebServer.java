@@ -1,7 +1,5 @@
 package com.mattprovis.uitest;
 
-import com.mattprovis.uitest.config.TestInitializer;
-import com.mattprovis.uitest.demo.config.Initializer;
 import org.apache.jasper.servlet.JspServlet;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.annotations.ClassInheritanceHandler;

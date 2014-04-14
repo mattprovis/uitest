@@ -1,5 +1,6 @@
-package com.mattprovis.uitest.config;
+package com.mattprovis.uitest.demo;
 
+import com.mattprovis.uitest.config.MocksConfig;
 import com.mattprovis.uitest.demo.config.Initializer;
 
 

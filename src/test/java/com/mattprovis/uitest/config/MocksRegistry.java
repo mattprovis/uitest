@@ -29,8 +29,7 @@ public class MocksRegistry {
     private Map<Class<?>, Object> registeredMocks = new HashMap<>();
 
     @Autowired
-    private List<MocksConfiguration> mocksConfigurations = new ArrayList<>();
-    private List<Throwable> exceptions = new ArrayList<>();
+    private List<MocksDefinition> mocksDefinitions = new ArrayList<>();
 
     public <T> T get(Class<T> key) {
         return (T) registeredMocks.get(key);
@@ -73,8 +72,8 @@ public class MocksRegistry {
         easyMockSupport.resetAll();
 
         // Setup the standard expectations again after resetting
-        for (MocksConfiguration mocksConfiguration : mocksConfigurations) {
-            mocksConfiguration.configureMocks();
+        for (MocksDefinition mocksDefinition : mocksDefinitions) {
+            mocksDefinition.configureMocks();
         }
     }
 }

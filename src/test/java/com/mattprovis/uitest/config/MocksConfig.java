@@ -16,9 +16,4 @@ public class MocksConfig {
     public MocksRegistry mocksRegistry() {
         return new MocksRegistry();
     }
-
-    @Bean
-    public GlobalExceptionHandler globalExceptionHandler() {
-        return new GlobalExceptionHandler();
-    }
 }

@@ -1,6 +1,6 @@
 package com.mattprovis.uitest;
 
-import com.mattprovis.uitest.config.TestInitializer;
+import com.mattprovis.uitest.demo.TestInitializer;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

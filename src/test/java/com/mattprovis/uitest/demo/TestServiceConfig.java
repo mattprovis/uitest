@@ -1,5 +1,6 @@
-package com.mattprovis.uitest.config;
+package com.mattprovis.uitest.demo;
 
+import com.mattprovis.uitest.config.MocksDefinition;
 import com.mattprovis.uitest.demo.entity.User;
 import com.mattprovis.uitest.demo.service.NewsService;
 import com.mattprovis.uitest.demo.service.ShoppingCartService;
@@ -13,8 +14,8 @@ import static org.easymock.EasyMock.expect;
 public class TestServiceConfig {
 
     @Bean
-    public MocksConfiguration serviceMocksConfiguration() {
-        return new MocksConfiguration(
+    public MocksDefinition serviceMocksConfiguration() {
+        return new MocksDefinition(
                 UserService.class,
                 User.class,
                 NewsService.class,
