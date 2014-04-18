@@ -30,20 +30,22 @@ import java.util.List;
  * Credit for much of this class goes to stackoverflow users Stevie (http://stackoverflow.com/a/13308996) and magomarcelo (http://stackoverflow.com/a/15702616).
  */
 public class WebServer {
-    public static final File RESOURCE_BASE_DIRECTORY = new File("src/main/webapp");
-    public static final String CONTEXT_PATH = "/";
     private final int port;
     private final String hostname;
     private final Class<? extends WebApplicationInitializer> initializer;
+    private final File resourceBaseDirectory;
+    private final String contextPath;
 
     private WebAppContext webAppContext;
 
     private Server server;
 
-    public WebServer(int port, String hostname, Class<? extends WebApplicationInitializer> initializer) {
+    public WebServer(int port, String hostname, Class<? extends WebApplicationInitializer> initializer, File resourceBaseDirectory, String contextPath) {
         this.port = port;
         this.hostname = hostname;
         this.initializer = initializer;
+        this.resourceBaseDirectory = resourceBaseDirectory;
+        this.contextPath = contextPath;
     }
 
     public void start() throws Exception {
@@ -86,8 +88,8 @@ public class WebServer {
     private HandlerCollection createHandlers() throws IOException, URISyntaxException {
         webAppContext = new WebAppContext();
         webAppContext.setParentLoaderPriority(true);
-        webAppContext.setContextPath(CONTEXT_PATH);
-        webAppContext.setResourceBase(RESOURCE_BASE_DIRECTORY.getAbsolutePath());
+        webAppContext.setContextPath(contextPath);
+        webAppContext.setResourceBase(resourceBaseDirectory.getAbsolutePath());
 
         File tempDir = new File(System.getProperty("java.io.tmpdir"));
         File scratchDir = new File(tempDir.toString(), "embedded-jetty-jsp");

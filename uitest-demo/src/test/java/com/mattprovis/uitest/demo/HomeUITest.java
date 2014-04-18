@@ -1,20 +1,22 @@
-package com.mattprovis.uitest.test;
+package com.mattprovis.uitest.demo;
 
 import com.mattprovis.uitest.AbstractUITestBase;
 import com.mattprovis.uitest.Mocked;
 import com.mattprovis.uitest.demo.entity.User;
 import com.mattprovis.uitest.demo.service.NewsService;
-import com.mattprovis.uitest.demo.service.ShoppingCartService;
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-
-import java.math.BigDecimal;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.easymock.EasyMock.expect;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {UITestConfiguration.class})
 public class HomeUITest extends AbstractUITestBase {
 
     @Mocked
@@ -39,8 +41,8 @@ public class HomeUITest extends AbstractUITestBase {
         driver.get(getBaseUrl() + "/");
         verifyAll();
 
-        assertThat(driver.getTitle(), is("Home - UI Test Demo"));
-        assertThat(driver.findElement(By.id("news")).getText(), is("We're now testing with UI Test!"));
+        Assert.assertThat(driver.getTitle(), CoreMatchers.is("Home - UI Test Demo"));
+        Assert.assertThat(driver.findElement(By.id("news")).getText(), CoreMatchers.is("We're now testing with UI Test!"));
     }
 
     @Test
@@ -53,8 +55,8 @@ public class HomeUITest extends AbstractUITestBase {
         driver.get(getBaseUrl() + "/");
         verifyAll();
 
-        assertThat(driver.findElement(By.id("userGreeting")).getText(), is("Hello Test User!"));
-        assertThat(driver.findElement(By.id("lastLoggedInTime")).getText(), is("Last logged in last week"));
+        Assert.assertThat(driver.findElement(By.id("userGreeting")).getText(), CoreMatchers.is("Hello Test User!"));
+        Assert.assertThat(driver.findElement(By.id("lastLoggedInTime")).getText(), CoreMatchers.is("Last logged in last week"));
     }
 
     @Test
@@ -65,8 +67,8 @@ public class HomeUITest extends AbstractUITestBase {
         driver.get(getBaseUrl() + "/");
         verifyAll();
 
-        assertThat(driver.findElement(By.id("userGreeting")).getText(), is("Please sign in"));
-        assertThat(driver.findElements(By.id("lastLoggedInTime")).size(), is(0));
+        Assert.assertThat(driver.findElement(By.id("userGreeting")).getText(), CoreMatchers.is("Please sign in"));
+        Assert.assertThat(driver.findElements(By.id("lastLoggedInTime")).size(), CoreMatchers.is(0));
     }
 
     @Test
@@ -77,7 +79,7 @@ public class HomeUITest extends AbstractUITestBase {
         driver.findElement(By.cssSelector("#shoppingCartItemsCount a")).click();
         verifyAll();
 
-        assertThat(driver.getTitle(), is("Shopping Cart - UI Test Demo"));
-        assertThat(driver.getCurrentUrl(), is(getBaseUrl() + "/shoppingCart"));
+        Assert.assertThat(driver.getTitle(), CoreMatchers.is("Shopping Cart - UI Test Demo"));
+        Assert.assertThat(driver.getCurrentUrl(), CoreMatchers.is(getBaseUrl() + "/shoppingCart"));
     }
 }

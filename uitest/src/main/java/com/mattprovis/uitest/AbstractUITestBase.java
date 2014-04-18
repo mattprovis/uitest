@@ -3,23 +3,18 @@ package com.mattprovis.uitest;
 import com.mattprovis.uitest.config.MocksRegistry;
 import org.easymock.EasyMockSupport;
 import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Field;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {UITestConfiguration.class})
 public abstract class AbstractUITestBase {
 
     @Autowired
-    protected FirefoxDriver driver;
+    protected WebDriver driver;
 
     @Autowired
     private WebServer webServer;
