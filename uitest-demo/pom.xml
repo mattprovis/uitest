@@ -133,8 +133,6 @@
             <artifactId>jetty-util</artifactId>
             <version>${jetty.version}</version>
         </dependency>
-
-        <!-- JSP and JSTL SUPPORT -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-jsp</artifactId>
@@ -160,13 +158,6 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-firefox-driver</artifactId>
-            <version>2.40.0</version>
-            <scope>test</scope>
-        </dependency>
-
 
     </dependencies>
 </project>

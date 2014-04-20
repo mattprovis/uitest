@@ -1,13 +1,11 @@
 package com.mattprovis.uitest;
 
+import org.junit.rules.TestRule;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.UnreachableBrowserException;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.WebApplicationInitializer;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 
 public abstract class AbstractUITestConfiguration {
@@ -23,13 +21,9 @@ public abstract class AbstractUITestConfiguration {
      */
     protected abstract Class<? extends WebApplicationInitializer> getTestInitializerClass();
 
-    /*
-     * Share a single instance of the Firefox driver between tests so we don't waste time opening a new window each time.
-     * If you have problems with tests interacting with each other, delete this bean and try creating a new instance for each test.
-     */
     @Bean(destroyMethod = "quit")
     public WebDriver webDriver() {
-        return new FirefoxDriver();
+        return new HtmlUnitDriver();
     }
 
     /**
