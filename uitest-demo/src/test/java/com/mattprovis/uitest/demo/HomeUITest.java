@@ -1,23 +1,17 @@
 package com.mattprovis.uitest.demo;
 
-import com.mattprovis.uitest.AbstractUITestBase;
 import com.mattprovis.uitest.Mocked;
+import com.mattprovis.uitest.StubExpectations;
 import com.mattprovis.uitest.demo.entity.User;
 import com.mattprovis.uitest.demo.service.NewsService;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.easymock.EasyMock.expect;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {UITestConfiguration.class})
-public class HomeUITest extends AbstractUITestBase {
+public class HomeUITest extends DemoUITestBase {
 
     @Mocked
     private NewsService newsService;
@@ -28,8 +22,8 @@ public class HomeUITest extends AbstractUITestBase {
     /*
      * We can set stub behaviour locally to a single test class, and then override it with .andReturn(...) in just the tests that care.
      */
-    @Before
-    public void setUp() throws Exception {
+    @StubExpectations
+    public void stubExpectations() throws Exception {
         expect(newsService.getLatestNews()).andStubReturn("Default news item");
     }
 

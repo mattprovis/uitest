@@ -1,38 +1,24 @@
 package com.mattprovis.uitest.demo;
 
-import com.mattprovis.uitest.config.MocksDefinition;
+import com.mattprovis.uitest.config.AbstractMockedBeansConfig;
+import com.mattprovis.uitest.config.MocksRegistry;
 import com.mattprovis.uitest.demo.entity.User;
 import com.mattprovis.uitest.demo.service.NewsService;
 import com.mattprovis.uitest.demo.service.ShoppingCartService;
 import com.mattprovis.uitest.demo.service.UserService;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import static org.easymock.EasyMock.expect;
+import javax.annotation.PostConstruct;
 
-@Configuration
-public class TestServiceConfig {
+public class TestServiceConfig extends AbstractMockedBeansConfig {
 
-    @Bean
-    public MocksDefinition serviceMocksConfiguration() {
-        return new MocksDefinition(
+    @Override
+    protected Class<?>[] getMockedBeanClasses() {
+        return new Class<?>[] {
                 UserService.class,
                 User.class,
                 NewsService.class,
-                ShoppingCartService.class
-        ) {
-            @Override
-            protected void configureMocks() {
-                UserService userService = get(UserService.class);
-                User user = get(User.class);
-                expect(userService.getCurrentUser()).andStubReturn(user);
-                expect(user.getName()).andStubReturn("Default User");
-                expect(user.getLastLoggedInTime()).andStubReturn("yesterday afternoon");
-                expect(user.isAuthorised()).andStubReturn(true);
-
-                ShoppingCartService shoppingCartService = get(ShoppingCartService.class);
-                expect(shoppingCartService.getItemsCount()).andStubReturn(2);
-            }
-        };
+                ShoppingCartService.class};
     }
 }

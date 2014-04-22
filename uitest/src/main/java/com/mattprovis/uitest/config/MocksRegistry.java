@@ -9,13 +9,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Proxy;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 @Component
 public class MocksRegistry {
@@ -28,13 +23,14 @@ public class MocksRegistry {
 
     private Map<Class<?>, Object> registeredMocks = new HashMap<>();
 
-    @Autowired
-    private List<MocksDefinition> mocksDefinitions = new ArrayList<>();
-
     public <T> T get(Class<T> key) {
         return (T) registeredMocks.get(key);
     }
 
+    /**
+     * Defines the mocks to be added as beans to the server's Spring context.
+     * They will also be recorded in the registry so that they can be reached with an @Mocked field in a UI Test.
+     */
     public void createMockBeans(Class... beanClasses) {
         AutowireCapableBeanFactory beanFactory = applicationContext.getAutowireCapableBeanFactory();
         SingletonBeanRegistry registry = (SingletonBeanRegistry) beanFactory;
@@ -70,10 +66,5 @@ public class MocksRegistry {
 
     public void resetMocks() {
         easyMockSupport.resetAll();
-
-        // Setup the standard expectations again after resetting
-        for (MocksDefinition mocksDefinition : mocksDefinitions) {
-            mocksDefinition.configureMocks();
-        }
     }
 }
