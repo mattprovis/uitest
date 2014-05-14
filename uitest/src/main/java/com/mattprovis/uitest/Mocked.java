@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * This annotation marks fields in a UI Test class (ie. a subclass of AbstractUITestBase) that are to be populated
  * with mocks from the server's context.
- * These mocks must be defined in an instance of MocksDefinition, as either beans or POJO instances reachable from a mocked bean.
+ * These mocks must be defined in a subclass of AbstractMockedBeansConfig, as either mocked beans or as mocked POJOs that are reachable from a mocked bean.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
