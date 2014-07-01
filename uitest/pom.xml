@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>8.1.9.v20130131</jetty.version>
-        <spring.version>3.2.8.RELEASE</spring.version>
+        <spring.version>3.2.9.RELEASE</spring.version>
         <selenium.version>2.40.0</selenium.version>
     </properties>
 

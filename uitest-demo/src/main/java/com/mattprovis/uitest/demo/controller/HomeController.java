@@ -22,4 +22,15 @@ public class HomeController extends AbstractController {
     public String getLatestNews() {
         return newsService.getLatestNews();
     }
+
+    @RequestMapping(value="/exception", method= RequestMethod.GET)
+    public String throwException() {
+        throw new IllegalStateException();
+    }
+
+    @RequestMapping(value="/error", method= RequestMethod.GET)
+    public String throwError() {
+        throw new OutOfMemoryError();
+    }
+
 }

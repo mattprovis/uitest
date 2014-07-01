@@ -3,6 +3,7 @@ package com.mattprovis.uitest;
 import com.mattprovis.uitest.config.MocksRegistry;
 import org.apache.log4j.Logger;
 import org.easymock.EasyMockSupport;
+import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,16 +88,36 @@ public abstract class AbstractUITestBase {
         resetAll();
     }
 
+    @After
+    // The usual way to check for exceptions is through verifyAll().
+    // But just in case that call is omitted, this method is marked @After to ensure it runs at test completion.
+    public void throwAnyCapturedException() throws Exception {
+        CapturedExceptionHolder capturedExceptionHolder = getBean(CapturedExceptionHolder.class);
+        Throwable capturedException = capturedExceptionHolder.getAndClear();
+        if (capturedException != null) {
+            if (capturedException instanceof Exception) {
+                throw (Exception) capturedException;
+            } else if (capturedException instanceof Error) {
+                throw (Error) capturedException;
+            } else {
+                throw new RuntimeException(capturedException);
+            }
+        }
+    }
+
     protected void replayAll() {
         easyMockSupport.replayAll();
     }
 
-    protected void verifyAll() {
+    protected void verifyAll() throws Exception {
+        throwAnyCapturedException();
         easyMockSupport.verifyAll();
     }
 
     protected void resetAll() {
         mocksRegistry.resetMocks();
+
+        getBean(CapturedExceptionHolder.class).getAndClear();
 
         executeStubExpectationsAnnotatedMethods();
     }
