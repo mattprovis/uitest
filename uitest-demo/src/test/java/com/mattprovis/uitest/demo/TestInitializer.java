@@ -1,6 +1,5 @@
 package com.mattprovis.uitest.demo;
 
-import com.mattprovis.uitest.config.ExceptionReportingConfig;
 import com.mattprovis.uitest.config.UITestCoreConfig;
 import com.mattprovis.uitest.demo.config.Initializer;
 
