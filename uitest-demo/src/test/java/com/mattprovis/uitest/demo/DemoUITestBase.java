@@ -1,6 +1,6 @@
 package com.mattprovis.uitest.demo;
 
-import com.mattprovis.uitest.AbstractUITestBase;
+import com.mattprovis.uitest.AbstractSeleniumUITestBase;
 import com.mattprovis.uitest.Mocked;
 import com.mattprovis.uitest.StubExpectations;
 import com.mattprovis.uitest.demo.entity.User;
@@ -14,7 +14,7 @@ import static org.easymock.EasyMock.expect;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {UITestConfiguration.class})
-public class DemoUITestBase extends AbstractUITestBase {
+public abstract class DemoUITestBase extends AbstractSeleniumUITestBase {
 
     @Mocked
     private UserService userService;

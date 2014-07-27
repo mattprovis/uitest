@@ -4,12 +4,11 @@ import com.mattprovis.uitest.Mocked;
 import com.mattprovis.uitest.StubExpectations;
 import com.mattprovis.uitest.demo.entity.User;
 import com.mattprovis.uitest.demo.service.NewsService;
-import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 import static org.easymock.EasyMock.expect;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class HomeUITest extends DemoUITestBase {
 
@@ -32,11 +31,11 @@ public class HomeUITest extends DemoUITestBase {
         expect(newsService.getLatestNews()).andReturn("We're now testing with UI Test!");
 
         replayAll();
-        driver.get(getBaseUrl() + "/");
+        go("/");
         verifyAll();
 
-        Assert.assertThat(driver.getTitle(), is("Home - UI Test Demo"));
-        Assert.assertThat(driver.findElement(By.id("news")).getText(), is("We're now testing with UI Test!"));
+        assertThat(driver.getTitle(), is("Home - UI Test Demo"));
+        assertThat(element("#news").getText(), is("We're now testing with UI Test!"));
     }
 
     @Test
@@ -46,11 +45,11 @@ public class HomeUITest extends DemoUITestBase {
         expect(user.getLastLoggedInTime()).andReturn("last week");
 
         replayAll();
-        driver.get(getBaseUrl() + "/");
+        go("/");
         verifyAll();
 
-        Assert.assertThat(driver.findElement(By.id("userGreeting")).getText(), is("Hello Test User!"));
-        Assert.assertThat(driver.findElement(By.id("lastLoggedInTime")).getText(), is("Last logged in last week"));
+        assertThat(element("#userGreeting").getText(), is("Hello Test User!"));
+        assertThat(element("#lastLoggedInTime").getText(), is("Last logged in last week"));
     }
 
     @Test
@@ -58,35 +57,35 @@ public class HomeUITest extends DemoUITestBase {
         expect(user.isAuthorised()).andReturn(false);
 
         replayAll();
-        driver.get(getBaseUrl() + "/");
+        go("/");
         verifyAll();
 
-        Assert.assertThat(driver.findElement(By.id("userGreeting")).getText(), is("Please sign in"));
-        Assert.assertThat(driver.findElements(By.id("lastLoggedInTime")).size(), is(0));
+        assertThat(element("#userGreeting").getText(), is("Please sign in"));
+        assertThat(elements("#lastLoggedInTime").size(), is(0));
     }
 
     @Test
     public void canNavigateToShoppingCartPage() throws Exception {
         replayAll();
-        driver.get(getBaseUrl() + "/");
-        driver.findElement(By.cssSelector("#shoppingCartItemsCount a")).click();
+        go("/");
+       element("#shoppingCartItemsCount a").click();
         verifyAll();
 
-        Assert.assertThat(driver.getTitle(), is("Shopping Cart - UI Test Demo"));
-        Assert.assertThat(driver.getCurrentUrl(), is(getBaseUrl() + "/shoppingCart"));
+        assertThat(driver.getTitle(), is("Shopping Cart - UI Test Demo"));
+        assertThat(driver.getCurrentUrl(), is(getBaseUrl() + "/shoppingCart"));
     }
 
     @Test(expected = IllegalStateException.class)
     public void shouldThrowAnExceptionBackOutToTheTest() throws Exception {
         replayAll();
-        driver.get(getBaseUrl() + "/exception");
+        go("/exception");
         verifyAll();
     }
 
     @Test(expected = OutOfMemoryError.class)
     public void shouldThrowAnErrorBackOutToTheTest() throws Exception {
         replayAll();
-        driver.get(getBaseUrl() + "/error");
+        go("/error");
         verifyAll();
     }
 }

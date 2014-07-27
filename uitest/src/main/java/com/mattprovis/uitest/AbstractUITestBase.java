@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import org.easymock.EasyMockSupport;
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -24,9 +23,6 @@ import static java.util.Arrays.asList;
 public abstract class AbstractUITestBase {
 
     private Logger logger = Logger.getLogger(AbstractUITestBase.class);
-
-    @Autowired
-    protected WebDriver driver;
 
     @Autowired
     private WebServer webServer;

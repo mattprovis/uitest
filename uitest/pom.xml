@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>8.1.9.v20130131</jetty.version>
         <spring.version>3.2.9.RELEASE</spring.version>
-        <selenium.version>2.40.0</selenium.version>
+        <selenium.version>2.42.2</selenium.version>
     </properties>
 
     <build>
@@ -116,6 +116,11 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
             <version>${selenium.version}</version>
         </dependency>
         <dependency>
