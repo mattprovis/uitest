@@ -25,12 +25,17 @@ public class HomeController extends AbstractController {
 
     @RequestMapping(value="/exception", method= RequestMethod.GET)
     public String throwException() {
-        throw new IllegalStateException();
+        throw new ExampleException();
     }
 
     @RequestMapping(value="/error", method= RequestMethod.GET)
     public String throwError() {
-        throw new OutOfMemoryError();
+        throw new ExampleError();
     }
 
+    public class ExampleException extends RuntimeException {
+    }
+
+    public class ExampleError extends Error {
+    }
 }

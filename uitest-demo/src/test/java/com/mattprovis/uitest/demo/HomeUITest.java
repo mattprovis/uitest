@@ -2,6 +2,7 @@ package com.mattprovis.uitest.demo;
 
 import com.mattprovis.uitest.Mocked;
 import com.mattprovis.uitest.StubExpectations;
+import com.mattprovis.uitest.demo.controller.HomeController;
 import com.mattprovis.uitest.demo.entity.User;
 import com.mattprovis.uitest.demo.service.NewsService;
 import org.junit.Test;
@@ -68,24 +69,24 @@ public class HomeUITest extends DemoUITestBase {
     public void canNavigateToShoppingCartPage() throws Exception {
         replayAll();
         go("/");
-       element("#shoppingCartItemsCount a").click();
+        element("#shoppingCartItemsCount a").click();
         verifyAll();
 
         assertThat(driver.getTitle(), is("Shopping Cart - UI Test Demo"));
         assertThat(driver.getCurrentUrl(), is(getBaseUrl() + "/shoppingCart"));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = HomeController.ExampleException.class)
     public void shouldThrowAnExceptionBackOutToTheTest() throws Exception {
         replayAll();
         go("/exception");
-        verifyAll();
+        verifyAll();  // this should throw the exception
     }
 
-    @Test(expected = OutOfMemoryError.class)
+    @Test(expected = HomeController.ExampleError.class)
     public void shouldThrowAnErrorBackOutToTheTest() throws Exception {
         replayAll();
         go("/error");
-        verifyAll();
+        verifyAll(); // this should throw the error
     }
 }
